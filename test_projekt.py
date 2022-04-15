@@ -1,7 +1,6 @@
-from re import L
 from link import Link
 from node import Node
-
+from graph import Graph
 
 def test_Link():
     link = Link(1, 2, 72, 3, 4)
@@ -26,3 +25,18 @@ def test_node_neighbours():
     node.add_link(1, 2, 72, 3, 4)
     node.add_link(1, 3, 73, 5, 6)
     assert node.neighbours == [2, 3]
+
+
+def test_graph():
+    node_1 = Node(1)
+    node_2 = Node(2)
+    node_3 = Node(3)
+    node_1.add_link(1, 2, 72, 3, 4)
+    node_1.add_link(1, 3, 73, 5, 6)
+    node_2.add_link(2, 1, 72, 3, 4)
+    node_3.add_link(3, 1, 73, 5, 6)
+    graph = Graph()
+    graph.add_nodes(node_1)
+    graph.add_nodes(node_2)
+    graph.add_nodes(node_3)
+    assert graph.get_nodes() == "Node ID:1, neighbours [2, 3]\nNode ID:2, neighbours [1]\nNode ID:3, neighbours [1]\n"

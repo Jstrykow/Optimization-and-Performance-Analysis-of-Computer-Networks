@@ -9,7 +9,7 @@ class Node():
         self.links = []
         self.neighbours = []
 
-    def get_if(self):
+    def get_id(self):
         return self._id
 
     def add_link(self, start_node_id: int, end_node_id: int, number_of_fibers: int, fiber_cost: int, number_of_lambdas_in_fiber: int):
@@ -19,3 +19,6 @@ class Node():
   
     def get_list_of_links(self):
         return self.links
+
+    def __str__(self):
+        return f"Node ID:{self.get_id()}, neighbours {self.neighbours}\n"
