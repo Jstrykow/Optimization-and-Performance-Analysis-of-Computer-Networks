@@ -1,4 +1,4 @@
-## clas for edges
+# class for edges
 """
 link
 - number of fibers
@@ -29,3 +29,7 @@ class Link():
 
     def get_number_of_lambdas_in_fiber(self):
         return self.number_of_lambdas_in_fiber
+    
+    def __str__(self):
+        return f"Link: start: {self.start_node_id}, end: {self.end_node_id}, number of fibers: {self.number_of_fibers}, fiber cost: {self.fiber_cost}, number of lambdas_in_fiber: {self.number_of_lambdas_in_fiber}"
+
