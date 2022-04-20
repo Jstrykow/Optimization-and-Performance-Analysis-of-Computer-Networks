@@ -9,16 +9,14 @@ class Input_Reader():
         self.name_of_file = name_of_file
         with open(name_of_file, "r") as file:
             self.data = file.readlines()
-        self.graph_data()
+        self.links = []
+        self.read_links()
 
-    def graph_data(self):
-        range = int(self.data[0])
-        nodes = []
+    def read_links(self):
+        # not used, maybe fo rerror detection self.range = int(self.data[0]) 
         for element in self.data[1:]:
             if(element == '-1\n'):
-                for node in nodes:
-                    print(node)
-                
+                for link in self.links: print(link)
                 return
             parameters = element.split()
             start_node_id = parameters[0]
@@ -28,20 +26,8 @@ class Input_Reader():
             number_of_lambdas_in_fiber = parameters[4]
             link = Link(start_node_id, end_node_id, number_of_fibers, fiber_cost, number_of_lambdas_in_fiber)
             # adding new nodes, checking node is in array
-            if not node_is_in_array(nodes, parameters[0]):
-                node = Node(parameters[0])
-                node.add_link(link)
-                nodes.append(node)
-            if not node_is_in_array(nodes, parameters[1]):
-                node = Node(parameters[1])
-                node.add_link(link)
-                nodes.append(node)
-            print(link)
-
-def node_is_in_array(nodes: Node, node_id: int):
-    for node in nodes:
-        if node.get_id() == node_id:
-            return True
-    return False
+            self.links.append(link)
+    
+            
 
 Input_Reader("data/net4.txt")

@@ -30,6 +30,6 @@ class Node():
             self.neighbours.append(end_node_id)
         else:
             self.neighbours.append(start_node_id)
-        
+
     def __str__(self):
         return f"Node ID:{self.get_id()}, neighbours {self.neighbours}\n"
