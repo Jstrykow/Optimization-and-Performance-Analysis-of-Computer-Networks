@@ -4,7 +4,8 @@ from network.Path import Path
 
 
 def test_Link():
-    link = Link(1, 2, 72, 3, 4)
+    link = Link(10, 1, 2, 72, 3, 4)
+    assert link.link_id == 10
     assert link.get_start_node_id() == 1
     assert link.get_end_node_id() == 2
     assert link.get_number_of_fibers() == 72
