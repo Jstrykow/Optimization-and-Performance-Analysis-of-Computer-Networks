@@ -1,5 +1,5 @@
 # class Graph
-from node import Node
+from network.Node import Node
 
 
 class Graph():

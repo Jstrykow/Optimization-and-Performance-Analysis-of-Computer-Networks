@@ -1,5 +1,5 @@
 # class representing node
-from link import Link
+from network.Link import Link
 
 
 # start node = node_id ? depends on bidiretional of graph

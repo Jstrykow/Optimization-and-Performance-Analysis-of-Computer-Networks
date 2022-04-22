@@ -1,5 +1,5 @@
-from link import Link
-from node import Node
+from network.Link import Link
+from network.Node import Node
 
 class Input_Reader:
     def read_links(self, name_of_file):
@@ -19,6 +19,21 @@ class Input_Reader:
             if(minus_one != -1):
                 print("Error during reading links")
             file.readline()
+"""
+demands class
+- number of demands
+- Demands list
+    Demand: 
+    - start node
+    - end node
+    - demand volume
+- <EOL> 
+- number of demands paths
+    - path list
+    Path:
+    - path id
+    - link list [nodes_ids]
+"""
 
 
 ir = Input_Reader()
