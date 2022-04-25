@@ -51,7 +51,7 @@ class Input_Reader:
         net.link = links
         net.demands = demands
         return net
-     
+
 
 ir = Input_Reader()
 net = ir.read_links("data/net4.txt")

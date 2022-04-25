@@ -9,8 +9,7 @@ link
 
 class Link():
     # add link id
-    def __init__(self, link_id: int, start_node_id: int, end_node_id: int, number_of_fibers: int, fiber_cost: int, number_of_lambdas_in_fiber: int):
-        self.link_id = link_id
+    def __init__(self, start_node_id: int, end_node_id: int, number_of_fibers: int, fiber_cost: int, number_of_lambdas_in_fiber: int):
         self.start_node_id = start_node_id
         self.end_node_id = end_node_id
         self.number_of_fibers = number_of_fibers

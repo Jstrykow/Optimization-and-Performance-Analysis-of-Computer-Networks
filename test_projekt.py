@@ -5,8 +5,7 @@ from network.Net import Net
 
 
 def test_Link():
-    link = Link(10, 1, 2, 72, 3, 4)
-    assert link.link_id == 10
+    link = Link(1, 2, 72, 3, 4)
     assert link.get_start_node_id() == 1
     assert link.get_end_node_id() == 2
     assert link.get_number_of_fibers() == 72
@@ -27,5 +26,30 @@ def test_Path():
     assert path.path_id == 1
     assert path.links_list == [2, 3]
 
-def test_Net():
+
+def test_test():
     pass
+
+
+def test_network():
+    net = Net()
+    links = []
+    links.append(Link(1, 2, 72, 3, 4))
+    links.append(Link(4, 5, 73, 7, 8))
+    path_1 = Path(1, [2, 3])
+    path_2 = Path(2, [1, 2, 3])
+    paths = [path_1, path_2]
+    demands = []
+    demands.append(Demand(1, 2, 3, [path_1]))
+    demands.append(Demand(2, 3, 4, paths))
+    net.links = links
+    net.demands = demands
+    assert net.links[0].get_start_node_id() == 1
+    assert net.links[0].get_end_node_id() == 2
+    assert net.links[0].get_number_of_fibers() == 72
+    assert net.links[0].get_fiber_cost() == 3
+    assert net.links[0].get_number_of_lambdas_in_fiber() == 4
+    msg = 'Link: start: 1, end: 2, number of fibers: 72, fiber cost: 3, number of lambdas_in_fiber: 4\nLink: start: 4, end: 5, number of fibers: 73, fiber cost: 7, number of lambdas_in_fiber: 8\nstart node: 1, end node: 2, demand_volume: 3, paths list:  path id: 1, link list: [2, 3] \nstart node: 2, end node: 3, demand_volume: 4, paths list:  path id: 1, link list: [2, 3]  path id: 2, link list: [1, 2, 3] \n'
+    assert str(net) == msg
+
+test_network()
