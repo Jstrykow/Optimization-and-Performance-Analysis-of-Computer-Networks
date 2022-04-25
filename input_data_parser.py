@@ -44,4 +44,4 @@ class Input_Reader:
 
 
 ir = Input_Reader()
-ir.read_links("data/net4.txt")
+ir.read_links("data/net12_2.txt")
