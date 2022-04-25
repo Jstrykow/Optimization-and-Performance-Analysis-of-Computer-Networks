@@ -1,6 +1,6 @@
-import network.Demand import Demand
-import network.Link import Link
 import itertools 
+from Link import Link
+from Demand import Demand
 
 
 # class for take all links, demands, nodes etc

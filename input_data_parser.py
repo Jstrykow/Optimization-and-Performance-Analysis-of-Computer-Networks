@@ -1,9 +1,13 @@
 from network.Link import Link
-from network.Path import Path
+from network.Path_test import Path
 from network.Demand import Demand
+from network.Net import Net
+
 
 class Input_Reader:
     def read_links(self, name_of_file):
+        links = []
+        demands = []
         with open(name_of_file, "r") as file:
             number_of_links = int(file.readline())
             for i in range(number_of_links):
@@ -17,6 +21,7 @@ class Input_Reader:
                 link = Link(link_id, start_node_id, end_node_id, number_of_fibers, fiber_cost, number_of_lambdas_in_fiber)
                 # adding new nodes, checking node is in array
                 # link = Link (parameters)
+                links.append(link)
                 print(link)
             minus_one = int(file.readline())
             if(minus_one != -1):
@@ -39,9 +44,15 @@ class Input_Reader:
                     path = Path(path_id, links_list)
                     paths_list.append(path)
                 demand = Demand(start_node=start_node_id, end_node=end_node_id, demand_volume=demand_volume, paths_list=paths_list)
+                demands.append(demand)
                 print(demand)
                 file.readline()
-
+                net = Net()
+                net.link = links
+                net.demands = demands
+                return net
+     
 
 ir = Input_Reader()
-ir.read_links("data/net12_2.txt")
+net = ir.read_links("data/net12_2.txt")
+print(net)

@@ -1,5 +1,4 @@
 from typing import Any, List
-from network.Path import Path
 """
 demands class
 - number of demands
@@ -12,7 +11,7 @@ demands class
 
 
 class Demand:
-    def __init__(self, start_node: int, end_node: int, demand_volume: int, paths_list: List[any] = None):
+    def __init__(self, start_node: int, end_node: int, demand_volume: int, paths_list: List[Any] = None):
         # demand id
         self.start_node = start_node
         self.end_node = end_node
