@@ -5,6 +5,8 @@ from network.Chromosome import Chromosome
 from network.Net import Net
 
 
+# not working link and demand id added
+
 def test_Link():
     link = Link(1, 2, 72, 3, 4)
     assert link.get_start_node_id() == 1
