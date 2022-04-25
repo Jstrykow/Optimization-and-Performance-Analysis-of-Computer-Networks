@@ -39,11 +39,11 @@ class BruteForce():
             [6, 1, 3, 4]
             """
 
-            all_flows_for_demand = self.rec( demand.demand_id, 1, demand.number_of_paths, demand.demand_volume)
+            all_flows_for_demand = self.rec(demand.demand_id, 1, demand.number_of_paths, demand.demand_volume)
             print(all_flows_for_demand)
             
             for demand_flow in all_flows_for_demand:
-                demand_flow.pathFlows.reverse()
+                demand_flow.path_flows.reverse()
             
             possible_flows.append(all_flows_for_demand)
             
