@@ -29,15 +29,6 @@ class BruteForce():
     def get_all_possible_flows(self):
         possible_flows = []
         for demand in self.net.demands:
-            print(f"[{demand.demand_id}, 1, {demand.number_of_paths}, {demand.demand_volume}]")
-            """
-            [1, 1, 3, 3]
-            [2, 1, 3, 4]
-            [3, 1, 2, 5]
-            [4, 1, 3, 2]
-            [5, 1, 3, 3]
-            [6, 1, 3, 4]
-            """
 
             all_flows_for_demand = self.rec(demand.demand_id, 1, demand.number_of_paths, demand.demand_volume)
             print(all_flows_for_demand)
@@ -76,4 +67,4 @@ ir = Input_Reader()
 net = ir.read_links("data/net4.txt")
 
 brute = BruteForce(net)
-brute.solve()
+print(brute.solve())
