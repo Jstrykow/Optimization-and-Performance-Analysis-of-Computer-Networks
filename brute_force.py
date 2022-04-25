@@ -2,7 +2,7 @@
 from network.Net import Net
 from input_data_parser import Input_Reader
 # solution x - two dimensional array of path-flows
-
+# dupa 2
 class Demand_flow():
     def __init__(self, demand_id: int, number_of_paths: int):
         self.demand_id = id
