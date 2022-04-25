@@ -15,6 +15,9 @@ class Link():
         self.number_of_fibers = number_of_fibers
         self.fiber_cost = fiber_cost
         self.number_of_lambdas_in_fiber = number_of_lambdas_in_fiber
+        # link capasity 
+        # self.number_of_fibers * self.number_of_lambdas_in_fiber
+
 
     def get_start_node_id(self):
         return self.start_node_id

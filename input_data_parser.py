@@ -1,5 +1,5 @@
 from network.Link import Link
-from network.Path_test import Path
+from network.Path import Path
 from network.Demand import Demand
 from network.Net import Net
 

@@ -20,3 +20,12 @@ list>
 <path id> ::= <integer>
 <path signals count> ::= <integer>
 """
+from network.Net import Net
+from network.Chromosome import Chromosome
+
+class Output_parser():
+    def __init__(self, net: Net):
+        self.net = net
+    
+    def save_solution(self, solution_chromosome: Chromose):
+        pass
