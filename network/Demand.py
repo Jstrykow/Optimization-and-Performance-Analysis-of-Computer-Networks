@@ -13,10 +13,10 @@ demands class
 class Demand:
     def __init__(self, demand_id: int, start_node: int, end_node: int, demand_volume: int, paths_list: List[Any] = None):
         # demand id
-        self.demand_id = demand_id
-        self.start_node = start_node
-        self.end_node = end_node
-        self.demand_volume = demand_volume
+        self.demand_id = int(demand_id)
+        self.start_node = int(start_node)
+        self.end_node = int(end_node)
+        self.demand_volume = int(demand_volume)
         if paths_list is not None:
             new_paths_list = paths_list.copy()
             self.paths_list = new_paths_list

@@ -21,6 +21,7 @@ class BruteForce():
         self.net = net
 
     def solve(self):
+       
         possible_solution = self.get_all_possible_flows()
         print(possible_solution)
         self.prepare_solution()
@@ -28,16 +29,27 @@ class BruteForce():
     def get_all_possible_flows(self):
         possible_flows = []
         for demand in self.net.demands:
-            print(demand.demand_volume)
+            print(f"[{demand.demand_id}, 1, {demand.number_of_paths}, {demand.demand_volume}]")
+            """
+            [1, 1, 3, 3]
+            [2, 1, 3, 4]
+            [3, 1, 2, 5]
+            [4, 1, 3, 2]
+            [5, 1, 3, 3]
+            [6, 1, 3, 4]
+            """
+
             all_flows_for_demand = self.rec( demand.demand_id, 1, demand.number_of_paths, demand.demand_volume)
+            print(all_flows_for_demand)
+            
             for demand_flow in all_flows_for_demand:
                 demand_flow.pathFlows.reverse()
             
             possible_flows.append(all_flows_for_demand)
-
+            
         return possible_flows
 
-    def rec(self, len_paths: int , curd: int, curp: int, lefth: int):  # current demand, current path, lefth, x
+    def rec(self, curd: int, curp: int, len_paths: int, lefth: int):  # current demand, current path, lefth, x
         all_possible_combinations = []
 
         if curp == len_paths:
