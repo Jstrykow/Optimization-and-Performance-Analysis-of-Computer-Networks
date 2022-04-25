@@ -1,6 +1,7 @@
 from network.Link import Link
 from network.Demand import Demand
-from network.Path import Path
+from network.Path_test import Path
+from network.Net import Net
 
 
 def test_Link():
@@ -25,3 +26,6 @@ def test_Path():
     path = Path(1, [2, 3])
     assert path.path_id == 1
     assert path.links_list == [2, 3]
+
+def test_Net():
+    pass

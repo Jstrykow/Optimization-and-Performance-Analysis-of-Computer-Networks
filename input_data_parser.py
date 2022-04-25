@@ -22,7 +22,7 @@ class Input_Reader:
                 # adding new nodes, checking node is in array
                 # link = Link (parameters)
                 links.append(link)
-                print(link)
+                # print(link)
             minus_one = int(file.readline())
             if(minus_one != -1):
                 print("Error during reading links")
@@ -45,14 +45,14 @@ class Input_Reader:
                     paths_list.append(path)
                 demand = Demand(start_node=start_node_id, end_node=end_node_id, demand_volume=demand_volume, paths_list=paths_list)
                 demands.append(demand)
-                print(demand)
+                # print(demand)
                 file.readline()
-                net = Net()
-                net.link = links
-                net.demands = demands
-                return net
+        net = Net()
+        net.link = links
+        net.demands = demands
+        return net
      
 
 ir = Input_Reader()
-net = ir.read_links("data/net12_2.txt")
+net = ir.read_links("data/net4.txt")
 print(net)
