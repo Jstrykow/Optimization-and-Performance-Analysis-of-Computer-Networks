@@ -20,7 +20,7 @@ class Demand_flow():
 
     def __str__(self):
         msg = ''
-        msg += f"{self.demand_id} {self.number_of_paths}"
+        msg += f"{self.demand_id} {self.number_of_paths}\n"
         msg += '\n'
         for path_flow in self.path_flows:
             msg += f"\n{str(path_flow)}"

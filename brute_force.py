@@ -15,15 +15,14 @@ class BruteForce():
     def solve(self):
        
         possible_solution = self.get_all_possible_flows()
-        print(possible_solution)
+        # print(possible_solution)
         self.prepare_solution()
 
     def get_all_possible_flows(self):
         possible_flows = []
         for demand in self.net.demands:
 
-            all_flows_for_demand = self.rec(demand.demand_id, 1, demand.number_of_paths, demand.demand_volume)
-            print(all_flows_for_demand)
+            all_flows_for_demand = self.rec(demand.demand_id, 1, demand.get_number_of_paths(), demand.demand_volume)
             
             for demand_flow in all_flows_for_demand:
                 demand_flow.path_flows.reverse()
@@ -46,12 +45,12 @@ class BruteForce():
                 for demand_flow in one_combinataion:
                     path_flow = Path_flow(curp, parth)
                     demand_flow.path_flows.append(path_flow)
-                    
                 all_possible_combinations += one_combinataion
 
         return all_possible_combinations
 
     def prepare_solution(self):
+        # check capatity and choose optimal solutoin
         pass
 
 

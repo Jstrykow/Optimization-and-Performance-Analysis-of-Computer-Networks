@@ -24,3 +24,6 @@ class Demand:
         for path in self.paths_list:
             resp += f" {path} "
         return resp
+
+    def get_number_of_paths(self) -> int:
+        return len(self.paths_list)
