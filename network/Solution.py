@@ -1,21 +1,47 @@
 # class for solutions
 from typing import List
 
-class link_load():
-    def __init__(self, link_id: int, number_of_signals:int, number_of_fiber: int):
+
+class Link_load():
+    def __init__(self, link_id: int, number_of_signals: int, number_of_fiber: int ):
         self.link_id = link_id
         self.number_of_signals = number_of_signals
         self.number_of_fibers = number_of_fiber
 
+    def str(self):
+        return f"'\n{self.link_id} {self.number_of_signals} {self.number_of_fibers}"
+ 
+class Demand_flow():
+    def __init__(self, demand_id: int, number_of_paths: int):
+        self.demand_id = demand_id
+        self.number_of_paths = number_of_paths
+        self.path_flows = []
+
+
+class Path_flow():
+    def __init__(self, path_id: int, lefth: int):
+        self.path_id = path_id
+        self.lefth = lefth
+    
+    def __str__(self):
+        
 
 
 class Solution():
-    def __init__(self, number_of_links: int, link_load_list: List[link_load] ):
+    def __init__(self, number_of_links: int, link_load_list: List[Link_load], number_of_demands: int, demand_flow_list: List[Demand_flow]):
         # <link part>
         self.number_of_links = number_of_links
         self.link_load_list = link_load_list
         # <demand part>
-
-
-
+        self.number_of_demand = number_of_demands
+        self.demand_flow_list = demand_flow_list
+    
+    def __str__(self):
+        msg = ""
+        msg += self.number_of_links + '\n'
+        msg += '\n'
+        # <link load part>
+        for link_load in self.link_load_list:
+            msg += str(link_load)
         # <demand part>
+    

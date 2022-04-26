@@ -2,18 +2,10 @@
 from network.Net import Net
 from input_data_parser import Input_Reader
 # solution x - two dimensional array of path-flows
-
-class Demand_flow():
-    def __init__(self, demand_id: int, number_of_paths: int):
-        self.demand_id = id
-        self.number_of_paths = number_of_paths
-        self.path_flows = []
+from network.Solution import Demand_flow, Path_flow
 
 
-class Path_flow():
-    def __init__(self, path_id: int, lefth: int):
-        self.path_id = path_id
-        self.lefth = lefth
+
 
 
 class BruteForce():
