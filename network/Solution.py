@@ -10,21 +10,29 @@ class Link_load():
 
     def str(self):
         return f"'\n{self.link_id} {self.number_of_signals} {self.number_of_fibers}"
- 
+
+
 class Demand_flow():
     def __init__(self, demand_id: int, number_of_paths: int):
         self.demand_id = demand_id
         self.number_of_paths = number_of_paths
         self.path_flows = []
 
+    def __str__(self):
+        msg = ''
+        msg += f"{self.demand_id} {self.number_of_paths}"
+        msg += '\n'
+        for path_flow in self.path_flows:
+            msg += f"\n{str(path_flow)}"
+        return msg
 
 class Path_flow():
     def __init__(self, path_id: int, lefth: int):
         self.path_id = path_id
         self.lefth = lefth
-    
+
     def __str__(self):
-        
+        return f"{self.path_id} {self.lefth}"
 
 
 class Solution():
@@ -35,7 +43,7 @@ class Solution():
         # <demand part>
         self.number_of_demand = number_of_demands
         self.demand_flow_list = demand_flow_list
-    
+
     def __str__(self):
         msg = ""
         msg += self.number_of_links + '\n'
@@ -44,4 +52,3 @@ class Solution():
         for link_load in self.link_load_list:
             msg += str(link_load)
         # <demand part>
-    

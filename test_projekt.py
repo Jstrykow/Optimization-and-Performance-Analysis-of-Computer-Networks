@@ -8,7 +8,8 @@ from network.Net import Net
 # not working link and demand id added
 
 def test_Link():
-    link = Link(1, 2, 72, 3, 4)
+    link = Link(1, 1, 2, 72, 3, 4)
+    assert link.link_id == 1
     assert link.get_start_node_id() == 1
     assert link.get_end_node_id() == 2
     assert link.get_number_of_fibers() == 72
@@ -18,7 +19,8 @@ def test_Link():
 
 
 def test_Demand():
-    demand = Demand(1, 2, 3)
+    demand = Demand(1, 1, 2, 3)
+    assert demand.demand_id == 1
     assert demand.start_node == 1
     assert demand.end_node == 2
     assert demand.demand_volume == 3
@@ -32,14 +34,18 @@ def test_Path():
 def test_network():
     net = Net()
     links = []
-    links.append(Link(1, 2, 72, 3, 4))
-    links.append(Link(4, 5, 73, 7, 8))
+    links.append(Link(1, 1, 2, 72, 3, 4))
+    links.append(Link(2, 4, 5, 73, 7, 8))
     path_1 = Path(1, [2, 3])
     path_2 = Path(2, [1, 2, 3])
     paths = [path_1, path_2]
     demands = []
-    demands.append(Demand(1, 2, 3, [path_1]))
-    demands.append(Demand(2, 3, 4, paths))
+    d1 = Demand(1, 1, 2, 3)
+    d1.paths_list = [path_1]
+    d2 = Demand(2, 2, 3, 4)
+    d2.paths_list = paths
+    demands.append(d1)
+    demands.append(d2)
     net.links = links
     net.demands = demands
     assert net.links[0].get_start_node_id() == 1
@@ -54,22 +60,18 @@ def test_network():
 def test_chromosome():
     net = Net()
     links = []
-    links.append(Link(1, 2, 72, 3, 4))
-    links.append(Link(4, 5, 73, 7, 8))
+    links.append(Link(1, 1, 2, 72, 3, 4))
+    links.append(Link(2, 4, 5, 73, 7, 8))
     path_1 = Path(1, [2, 3])
     path_2 = Path(2, [1, 2, 3])
     paths = [path_1, path_2]
     demands = []
-    demands.append(Demand(1, 2, 3, [path_1]))
-    demands.append(Demand(2, 3, 4, paths))
+    d1 = Demand(1, 1, 2, 3)
+    d1.paths_list = [path_1]
+    d2 = Demand(2, 2, 3, 4)
+    d2.paths_list = paths
+    demands.append(d1)
+    demands.append(d2)
     net.links = links
     net.demands = demands
-    
-    chrom = Chromosome()
-
-test_chromosome()
-
-"""
-def test_input_parser():
-    pass 
-"""
+    pass

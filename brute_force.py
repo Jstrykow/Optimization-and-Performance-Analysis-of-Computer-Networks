@@ -46,7 +46,7 @@ class BruteForce():
                 for demand_flow in one_combinataion:
                     path_flow = Path_flow(curp, parth)
                     demand_flow.path_flows.append(path_flow)
-                
+                    
                 all_possible_combinations += one_combinataion
 
         return all_possible_combinations
@@ -59,4 +59,4 @@ ir = Input_Reader()
 net = ir.read_links("data/net4.txt")
 
 brute = BruteForce(net)
-print(brute.solve())
+brute.solve()
