@@ -52,3 +52,9 @@ class Solution():
         for link_load in self.link_load_list:
             msg += str(link_load)
         # <demand part>
+        #
+        #NIE  TESTOWANE
+        #
+        #
+        for demand in self.demand_flow_list
+            msg += str(demand)
