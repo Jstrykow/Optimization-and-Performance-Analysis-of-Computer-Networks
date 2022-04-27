@@ -65,25 +65,25 @@ class BruteForce():
             # print(self.net)
             # print(solution)
             solution.calulate_load_link(self.net.demands, self.net.links)
-        """
+        
             solution.calculate_objactive_DAP()
-            if len(self.lastTopSolutionsDAP) < self.maxTopSolutions or solution.objectiveDAP < self.lastTopSolutionsDAP[-1].objectiveDAP:
+            if len(self.lastTopSolutionsDAP) < self.max_top_solution or solution.objactive_DAP < self.lastTopSolutionsDAP[-1].objectiveDAP:
                 self.lastTopSolutionsDAP.append(solution)
-                self.lastTopSolutionsDAP.sort(key=lambda x: x.objectiveDAP)
-                if len(self.lastTopSolutionsDAP) > self.maxTopSolutions:
+                self.lastTopSolutionsDAP.sort(key=lambda x: x.objactive_DAP)
+                if len(self.lastTopSolutionsDAP) > self.max_top_solution:
                     self.lastTopSolutionsDAP.pop()
-
-            solution.calculate_objactive_DDAP(self.network.links)
-            if len(self.lastTopSolutionsDDAP) < self.maxTopSolutions or solution.objectiveDDAP < self.lastTopSolutionsDDAP[-1].objectiveDDAP:
+        
+            solution.calculate_objactive_DDAP(self.net.links)
+            if len(self.lastTopSolutionsDDAP) < self.max_top_solution or solution.objactive_DDAP < self.lastTopSolutionsDDAP[-1].objectiveDDAP:
                 self.lastTopSolutionsDDAP.append(solution)
-                self.lastTopSolutionsDDAP.sort(key=lambda x: x.objectiveDDAP)
-                if len(self.lastTopSolutionsDDAP) > self.maxTopSolutions:
+                self.lastTopSolutionsDDAP.sort(key=lambda x: x.objactive_DDAP)
+                if len(self.lastTopSolutionsDDAP) > self.max_top_solution:
                     self.lastTopSolutionsDDAP.pop()
 
-            self.allSolutions.append(solution)
+            self.all_solutions.append(solution)
         self.bestSolutionDAP = self.lastTopSolutionsDAP[0]
         self.bestSolutionDDAP = self.lastTopSolutionsDDAP[0]
-        """
+        
 
 ir = Input_Reader()
 net = ir.read_links("data/net4.txt")

@@ -67,14 +67,14 @@ class Solution():
             for (path_id, path_flow) in enumerate(demand_flow.path_flows):
                 for link_id in range(len(demands[demand_id].paths_list[path_id].links_list)):
                     self.link_load_list[link_id - 1].volume += int(path_flow.volume)
-                    print(self.link_load_list[link_id - 1].volume)
-        # for (link_id, link_load) in enumerate(self.link_load_list):
-        #    link_load.number_of_fibers = math.ceil(link_load.number_of_signals / links[link_id].number_of_lambdas_in_fiber)
+                    # print(self.link_load_list[link_id - 1].volume)
+        for (link_id, link_load) in enumerate(self.link_load_list):
+            link_load.number_of_fibers = math.ceil(link_load.number_of_fibers / links[link_id].number_of_lambdas_in_fiber)
 
     def calculate_objactive_DAP(self):
         objective_value = 0
-        for link_load in enumerate(self.link_load_list):
-            obj = link_load.number_of_signals
+        for link_load in self.link_load_list:
+            obj = link_load.volume
             if obj > objective_value:
                 objective_value = obj
         self.objactive_DAP = objective_value
