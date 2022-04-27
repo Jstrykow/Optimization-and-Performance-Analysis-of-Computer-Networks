@@ -1,11 +1,12 @@
 # class for solutions
+import math
 from typing import List
 
 
 class Link_load():
     def __init__(self, link_id: int, number_of_signals: int, number_of_fiber: int ):
         self.link_id = link_id
-        self.number_of_signals = number_of_signals
+        self.number_of_signals = number_of_signals # volume
         self.number_of_fibers = number_of_fiber
 
     def str(self):
@@ -36,14 +37,53 @@ class Path_flow():
 
 
 class Solution():
-    def __init__(self, number_of_links: int, link_load_list: List[Link_load], number_of_demands: int, demand_flow_list: List[Demand_flow]):
+    def __init__(self, solution_id, number_of_links: int,  number_of_demands: int) # demand_flow_list: List[Demand_flow], link_load_list: List[Link_load],):
         # <link part>
+        self.solution_id = solution_id
         self.number_of_links = number_of_links
-        self.link_load_list = link_load_list
+        self.link_load_list = [] # link_load_list
         # <demand part>
         self.number_of_demand = number_of_demands
-        self.demand_flow_list = demand_flow_list
+        self.demand_flow_list = [] #demand_flow_list
 
+        # bruteforce alg
+        self.objactive_DAP = None
+        self.objactive_DDAP = None
+        # evolutionary algorthm
+        self.objactive = None
+    
+    def calulate_load_link(self, demands, links):
+        self.link_load_list.clear()
+
+        # new empty load list
+        for load_id in range(self.number_of_links):
+            link_load = Link_load(load_id + 1, 0, 0)
+            self.link_load_list.append(link_load)
+        
+        for (demand_id, demand_flow) in enumerate(self.demand_flow_list):
+            for (path_id, path_flow) in enumerate(demand_flow.path_flows):
+                for link_id in demands[demand_id].paths[path_id].links:
+                    self.link_load_list[link_id - 1].volume += path_flow
+        
+        for (link_id, link_load) in enumerate(self.link_load_list):
+            link_load.number_of_fibers = math.ceil(link_load.number_of_signals / links[link_id].number_of_lambdas_in_fiber)
+
+
+    def calculate_objactive_DAP():
+        pass
+    
+    def calculate_objactive_DDAP():
+        pass
+    
+    def __eq__(self, other):
+        return self.objective == other.objective
+
+    def __lt__(self, other):
+        return self.objactive < other.objective
+    
+    def __gt__(self, other):
+        return self.objactive > other.objective
+    
     def __str__(self):
         msg = ""
         msg += self.number_of_links + '\n'
@@ -56,5 +96,5 @@ class Solution():
         #NIE  TESTOWANE
         #
         #
-        for demand in self.demand_flow_list
+        for demand in self.demand_flow_list:
             msg += str(demand)

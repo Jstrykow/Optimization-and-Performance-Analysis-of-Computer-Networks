@@ -5,12 +5,12 @@ from input_data_parser import Input_Reader
 from network.Solution import Demand_flow, Path_flow
 
 
-
-
-
 class BruteForce():
     def __init__(self, net: Net):
         self.net = net
+        self.all_solutions = []
+        self.best_solution_DAP = None
+        self.best_solution_DDA = None
 
     def solve(self):
        
@@ -58,4 +58,4 @@ ir = Input_Reader()
 net = ir.read_links("data/net4.txt")
 
 brute = BruteForce(net)
-brute.solve()
+brute.solve()   

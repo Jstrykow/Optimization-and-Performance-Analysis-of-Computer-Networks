@@ -40,7 +40,7 @@ class EvolutionaryAlgorithm:
         
 
     def mutate(seed = None):
-        # there is adding radom element in proces of elvolution, it is to move from local optimum. 
+        # there is adding radom element in proces of elvolution, it is to move from local optimum.
         # seed is parametr of function for making possible replication of function
         pass
 
