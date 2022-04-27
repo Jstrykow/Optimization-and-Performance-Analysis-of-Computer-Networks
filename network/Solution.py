@@ -12,8 +12,8 @@ class Link_load():
         self.volume = volume # volume
         self.number_of_fibers = number_of_fiber
 
-    def str(self):
-        return f"'\n{self.link_id} {self.number_of_signals} {self.number_of_fibers}"
+    def __str__(self):
+        return f"\n{self.link_id} {self.volume} {self.number_of_fibers}"
 
 
 class Demand_flow():
@@ -25,7 +25,6 @@ class Demand_flow():
     def __str__(self):
         msg = ''
         msg += f"{self.demand_id} {self.number_of_paths}\n"
-        msg += '\n'
         for path_flow in self.path_flows:
             msg += f"\n{str(path_flow)}"
         return msg
@@ -36,7 +35,7 @@ class Demand_path_flow():
         self.volume = lefth
 
     def __str__(self):
-        return f"{self.path_id} {self.volume}"
+        return f"\n{self.path_id} {self.volume}"
 
 
 class Solution():
@@ -53,7 +52,7 @@ class Solution():
         self.objective_DAP = None
         self.objective_DDAP = None
         # evolutionary algorthm
-        self.objactive = None
+        self.objective = None
     
     def calulate_load_link(self, demands: List[Demand], links: List[Link]):
         self.link_load_list.clear()
@@ -101,16 +100,17 @@ class Solution():
     
     def __str__(self):
         msg = ""
-        msg += str(self.number_of_links) + '\n'
-        msg += '\n'
+        msg += str(self.number_of_links)
         # <link load part>
         for link_load in self.link_load_list:
             msg += str(link_load)
+        msg += '\n-1\n\n'
         # <demand part>
-        #
-        #NIE  TESTOWANE
-        #
+        msg += str(self.number_of_demand)
         #
         for demand in self.demand_flow_list:
-            msg += str(demand)
+            msg += f"\n{demand.demand_id} {demand.number_of_paths}"
+            for path in demand.path_flows:
+                msg += f"\n{path.path_id} {path.volume}"
+            msg += '\n'
         return msg

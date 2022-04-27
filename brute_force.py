@@ -7,7 +7,7 @@ import itertools
 
 
 class BruteForce():
-    def __init__(self, net: Net, max_top_solution=15):
+    def __init__(self, net: Net, max_top_solution=30):
         self.net = net
         self.all_solutions = []
         self.best_solution_DAP = None
@@ -21,9 +21,9 @@ class BruteForce():
         # print(possible_solution)
         self.choose_solution(possible_solution)
 
-        # print(self.best_solution_DAP)
+        print(self.best_solution_DAP)
         # msg = "DAP - ID:" + str(self.best_solution_DAP.solution_id) + ", objecive value: " + str(self.best_solution_DAP.objective_DAP) + "\n"
-        #msg += "DDAP - ID:" + str(self.best_solution_DDAP.solution_id) + ", objecive value: " + str(self.best_solution_DDAP.objective_DDAP) + "\n"
+        # msg += "DDAP - ID:" + str(self.best_solution_DDAP.solution_id) + ", objecive value: " + str(self.best_solution_DDAP.objective_DDAP) + "\n"
         # print(msg)
 
     def get_all_possible_flows(self):
