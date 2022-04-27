@@ -86,9 +86,9 @@ class Solution():
         for (link_id, link_load) in enumerate(self.link_load_list):
             link_cost = link_load.number_of_fibers * links[link_id].fiber_cost
             objective_value += link_cost
-        self.objectiveDDAP = objective_value
+        self.objactive_DDAP = objective_value
         self.objective = objective_value
-        return self.objectiveDDAP
+        return self.objactive_DDAP
     
     def __eq__(self, other):
         return self.objective == other.objective

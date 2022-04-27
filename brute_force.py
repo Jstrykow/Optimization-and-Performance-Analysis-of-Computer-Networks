@@ -7,11 +7,11 @@ import itertools
 
 
 class BruteForce():
-    def __init__(self, net: Net, max_top_solution=20):
+    def __init__(self, net: Net, max_top_solution=15):
         self.net = net
         self.all_solutions = []
         self.best_solution_DAP = None
-        self.best_solution_DDA = None
+        self.best_solution_DDAP = None
         self.max_top_solution = max_top_solution
         self.lastTopSolutionsDAP = []  # lists of top solutions
         self.lastTopSolutionsDDAP = []
@@ -20,7 +20,7 @@ class BruteForce():
         possible_solution = self.get_all_possible_flows()
         # print(possible_solution)
         self.choose_solution(possible_solution)
-        pass
+        
 
     def get_all_possible_flows(self):
         possible_flows = []
@@ -62,27 +62,27 @@ class BruteForce():
                                            number_of_links=self.net.get_number_of_links(),
                                            number_of_demands=self.net.get_number_of_demands())
             solution.demand_flow_list = list(combinations_of_demands_flows)
-            # print(self.net)
-            # print(solution)
             solution.calulate_load_link(self.net.demands, self.net.links)
         
             solution.calculate_objactive_DAP()
-            if len(self.lastTopSolutionsDAP) < self.max_top_solution or solution.objactive_DAP < self.lastTopSolutionsDAP[-1].objectiveDAP:
+            if len(self.lastTopSolutionsDAP) < self.max_top_solution or solution.objactive_DAP < self.lastTopSolutionsDAP[-1].objactive_DAP:
                 self.lastTopSolutionsDAP.append(solution)
                 self.lastTopSolutionsDAP.sort(key=lambda x: x.objactive_DAP)
+                
                 if len(self.lastTopSolutionsDAP) > self.max_top_solution:
                     self.lastTopSolutionsDAP.pop()
+
         
             solution.calculate_objactive_DDAP(self.net.links)
-            if len(self.lastTopSolutionsDDAP) < self.max_top_solution or solution.objactive_DDAP < self.lastTopSolutionsDDAP[-1].objectiveDDAP:
+            if len(self.lastTopSolutionsDDAP) < self.max_top_solution or solution.objactive_DDAP < self.lastTopSolutionsDDAP[-1].objactive_DDAP:
                 self.lastTopSolutionsDDAP.append(solution)
                 self.lastTopSolutionsDDAP.sort(key=lambda x: x.objactive_DDAP)
                 if len(self.lastTopSolutionsDDAP) > self.max_top_solution:
                     self.lastTopSolutionsDDAP.pop()
 
             self.all_solutions.append(solution)
-        self.bestSolutionDAP = self.lastTopSolutionsDAP[0]
-        self.bestSolutionDDAP = self.lastTopSolutionsDDAP[0]
+        self.best_solution_DAP = self.lastTopSolutionsDAP[0]
+        self.best_solution_DDAP = self.lastTopSolutionsDDAP[0]
         
 
 ir = Input_Reader()
