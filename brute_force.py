@@ -19,7 +19,7 @@ class BruteForce():
     def solve(self):
         possible_solution = self.get_all_possible_flows()
         # print(possible_solution)
-        # self.choose_solution(possible_solution)
+        self.choose_solution(possible_solution)
         pass
 
     def get_all_possible_flows(self):
@@ -55,14 +55,17 @@ class BruteForce():
 
     def choose_solution(self, possible_flows):
         solution_id = 0
+        # print(self.net.get_number_of_links())
         for combinations_of_demands_flows in itertools.product(*possible_flows):
             solution_id += 1
             solution = Solution(solution_id=solution_id,
                                            number_of_links=self.net.get_number_of_links(),
                                            number_of_demands=self.net.get_number_of_demands())
             solution.demand_flow_list = list(combinations_of_demands_flows)
+            # print(self.net)
+            # print(solution)
             solution.calulate_load_link(self.net.demands, self.net.links)
-
+        """
             solution.calculate_objactive_DAP()
             if len(self.lastTopSolutionsDAP) < self.maxTopSolutions or solution.objectiveDAP < self.lastTopSolutionsDAP[-1].objectiveDAP:
                 self.lastTopSolutionsDAP.append(solution)
@@ -80,6 +83,7 @@ class BruteForce():
             self.allSolutions.append(solution)
         self.bestSolutionDAP = self.lastTopSolutionsDAP[0]
         self.bestSolutionDDAP = self.lastTopSolutionsDDAP[0]
+        """
 
 ir = Input_Reader()
 net = ir.read_links("data/net4.txt")

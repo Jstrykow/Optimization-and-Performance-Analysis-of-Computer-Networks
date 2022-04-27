@@ -13,11 +13,11 @@ class Input_Reader:
             for i in range(number_of_links):
                 parameters = file.readline().strip().split(" ")
                 link_id = i + 1
-                start_node_id = parameters[0]
-                end_node_id = parameters[1]
-                number_of_fibers = parameters[2]
-                fiber_cost = parameters[3]
-                number_of_lambdas_in_fiber = parameters[4]
+                start_node_id = int(parameters[0])
+                end_node_id = int(parameters[1])
+                number_of_fibers = int(parameters[2])
+                fiber_cost = int(parameters[3])
+                number_of_lambdas_in_fiber = int(parameters[4])
                 link = Link(link_id, start_node_id, end_node_id, number_of_fibers, fiber_cost, number_of_lambdas_in_fiber)
                 # adding new nodes, checking node is in array
                 # link = Link (parameters)
@@ -34,13 +34,13 @@ class Input_Reader:
                 paths_list = []
                 demand_id = i + 1
                 parameters = file.readline().strip().split()
-                start_node_id = parameters[0]
-                end_node_id = parameters[1]
-                demand_volume = parameters[2]
+                start_node_id = int(parameters[0])
+                end_node_id = int(parameters[1])
+                demand_volume = int(parameters[2])
                 number_of_paths = int(file.readline())
                 for j in range(number_of_paths):
                     path_parameters = file.readline().strip().split()
-                    path_id = path_parameters[0]
+                    path_id = int(path_parameters[0])
                     links_list = path_parameters[1:]
                     path = Path(path_id, links_list)
                     paths_list.append(path)
@@ -50,7 +50,7 @@ class Input_Reader:
                 # print(demand)
                 file.readline()
         net = Net()
-        net.link = links
+        net.links = links
         net.demands = demands
         return net
 
