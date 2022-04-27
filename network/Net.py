@@ -26,3 +26,10 @@ class Net:
         for demand in self.demands:
             resp += str(demand) + '\n'
         return resp
+
+    def get_number_of_links(self) -> int:
+        return len(self.links)
+
+    def get_number_of_demands(self) -> int:
+        return len(self.demands)
+

@@ -1,7 +1,9 @@
 # class for solutions
 import math
+import re
 from typing import List
-
+from network.Demand import Demand
+from network.Link import Link
 
 class Link_load():
     def __init__(self, link_id: int, number_of_signals: int, number_of_fiber: int ):
@@ -37,7 +39,7 @@ class Path_flow():
 
 
 class Solution():
-    def __init__(self, solution_id, number_of_links: int,  number_of_demands: int) # demand_flow_list: List[Demand_flow], link_load_list: List[Link_load],):
+    def __init__(self, solution_id: int, number_of_links: int,  number_of_demands: int): # demand_flow_list: List[Demand_flow], link_load_list: List[Link_load],):
         # <link part>
         self.solution_id = solution_id
         self.number_of_links = number_of_links
@@ -52,7 +54,7 @@ class Solution():
         # evolutionary algorthm
         self.objactive = None
     
-    def calulate_load_link(self, demands, links):
+    def calulate_load_link(self, demands: List[Demand], links: List[Link]):
         self.link_load_list.clear()
 
         # new empty load list
@@ -62,18 +64,30 @@ class Solution():
         
         for (demand_id, demand_flow) in enumerate(self.demand_flow_list):
             for (path_id, path_flow) in enumerate(demand_flow.path_flows):
-                for link_id in demands[demand_id].paths[path_id].links:
+                for link_id in demands[demand_id].paths_list[path_id].links:
                     self.link_load_list[link_id - 1].volume += path_flow
         
         for (link_id, link_load) in enumerate(self.link_load_list):
             link_load.number_of_fibers = math.ceil(link_load.number_of_signals / links[link_id].number_of_lambdas_in_fiber)
 
+    def calculate_objactive_DAP(self):
+        objective_value = 0
+        for link_load in enumerate(self.link_load_list):
+            obj = link_load.number_of_signals
+            if obj > objective_value:
+                objective_value = obj
+        self.objactive_DAP = objective_value
+        self.objactive = objective_value
+        return self.objactive_DAP
 
-    def calculate_objactive_DAP():
-        pass
-    
-    def calculate_objactive_DDAP():
-        pass
+    def calculate_objactive_DDAP(self, links: List[Link]):
+        objective_value = 0
+        for (link_id, link_load) in enumerate(self.linkLoads):
+            link_cost = link_load.number_of_fibers * links[link_id].fiber_cost
+            objective_value += link_cost
+        self.objectiveDDAP = objective_value
+        self.objective = objective_value
+        return self.objectiveDDAP
     
     def __eq__(self, other):
         return self.objective == other.objective

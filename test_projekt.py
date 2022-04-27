@@ -3,6 +3,7 @@ from network.Demand import Demand
 from network.Path import Path
 from network.Chromosome import Chromosome
 from network.Net import Net
+from network.Solution import Solution
 
 
 # not working link and demand id added
@@ -75,3 +76,6 @@ def test_chromosome():
     net.links = links
     net.demands = demands
     pass
+
+
+sol = Solution(1, 2, 3)
