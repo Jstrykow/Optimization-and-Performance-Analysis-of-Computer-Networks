@@ -50,8 +50,8 @@ class Solution():
         self.demand_flow_list = []  # demand_flow_list
 
         # bruteforce alg
-        self.objactive_DAP = None
-        self.objactive_DDAP = None
+        self.objective_DAP = None
+        self.objective_DDAP = None
         # evolutionary algorthm
         self.objactive = None
     
@@ -77,18 +77,18 @@ class Solution():
             obj = link_load.volume
             if obj > objective_value:
                 objective_value = obj
-        self.objactive_DAP = objective_value
+        self.objective_DAP = objective_value
         self.objactive = objective_value
-        return self.objactive_DAP
+        return self.objective_DAP
 
     def calculate_objactive_DDAP(self, links: List[Link]):
         objective_value = 0
         for (link_id, link_load) in enumerate(self.link_load_list):
             link_cost = link_load.number_of_fibers * links[link_id].fiber_cost
             objective_value += link_cost
-        self.objactive_DDAP = objective_value
+        self.objective_DDAP = objective_value
         self.objective = objective_value
-        return self.objactive_DDAP
+        return self.objective_DDAP
     
     def __eq__(self, other):
         return self.objective == other.objective
