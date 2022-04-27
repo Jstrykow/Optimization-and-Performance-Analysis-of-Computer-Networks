@@ -41,8 +41,11 @@ class EvolutionaryAlgorithm:
         self.initial_time = None
         self.generations = 0
         self.no_progress = 0
-        self.results_history =[]
+        self.results_history = []
         self.mutation = 0
+
+        self.number_of_best_chromosomes = round(number_of_chromosomes * procent_of_best_chromosomes)
+        self.population_padding = number_of_chromosomes - self.number_of_best_chromosomes
 
     def calculate(self) -> Chromosome:
         self.initial_time = time()
@@ -130,7 +133,7 @@ class EvolutionaryAlgorithm:
         return random.random() < self.mutation_probability
 
     def get_init_population(self) -> List:
-        all_genes_combinations = [self.get_all_possible_chromosomes_with_one_gene(demand) for demand in
+        all_genes_combinations = [self.get_all_chromosomes_with_one_gene(demand) for demand in
                                   self.net.demands]
         chromosomes = []
 
@@ -139,13 +142,13 @@ class EvolutionaryAlgorithm:
             for gene_combination in all_genes_combinations:
                 gene = random.choice(gene_combination).allocation_pattern
                 chromosome.add_gene(gene)
-            chromosome.calculate_links_for_problem(self.net, problem=self.problem)
+            chromosome.calculate(self.net, prb=self.prb)
             chromosomes.append(chromosome)
 
         random.shuffle(chromosomes)
         return chromosomes
 
-    def get_all_possible_chromosomes_with_one_gene(self, demand: Demand) -> List[Chromosome]:
+    def get_all_chromosomes_with_one_gene(self, demand: Demand) -> List[Chromosome]:
         volume_split = range(demand.volume + 1)
         volume_split_for_each_path = [volume_split for _ in range(demand.get_number_of_paths())]
 
@@ -164,22 +167,22 @@ class EvolutionaryAlgorithm:
         return allocation_vector
 
     def ending(self) -> bool:
-        time_exceeded = time() - self.start_time >= self.max_time
+        time_exceeded = time() - self.initial_time >= self.max_time
         if time_exceeded:
             print("Time limit reached.")
             return True
 
-        generations_exceeded = self.generation >= self.max_generations
+        generations_exceeded = self.generations >= self.max_generations
         if generations_exceeded:
             print("Generations limit reached.")
             return True
 
-        mutations_exceeded = self.mutations >= self.max_mutations
+        mutations_exceeded = self.mutation >= self.max_mutation
         if mutations_exceeded:
             print("Mutations limit reached.")
             return True
 
-        no_progress = self.no_progress >= self.max_no_progress_generations
+        no_progress = self.no_progress >= self.max_no_progress_generation
         if no_progress:
             print("Iteration without progress limit reached.")
             return True

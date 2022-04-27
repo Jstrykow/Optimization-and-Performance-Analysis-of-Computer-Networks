@@ -7,7 +7,7 @@ import random
 from pprint import pformat
 
 
-class Chromosome():
+class Chromosome:
     def __init__(self, allocation_pattern: dict):
         self.allocation_pattern = allocation_pattern
         self.link_size = []
@@ -52,7 +52,7 @@ class Chromosome():
     def calculate_z(self, net: Net, prob: str):
         if prob == "DDAP":
             z = 0
-            for link_id, link_size in enumerate(self.link_sizes):
+            for link_id, link_size in enumerate(self.link_size):
                 z += net.links[link_id].cost * link_size
             self.z = z
         else:
@@ -71,8 +71,8 @@ class Chromosome():
     def __str__(self):
         text = "Flows for (demand, path):\n" + pformat(self.allocation_pattern)
 
-        if self.link_sizes:
-            text += f"\nLink sizes: {self.link_sizes}"
+        if self.link_size:
+            text += f"\nLink sizes: {self.link_size}"
         if self.link_loads:
             text += f"\nLink loads: {self.link_loads}"
         text += f"\nz = {self.z}"
