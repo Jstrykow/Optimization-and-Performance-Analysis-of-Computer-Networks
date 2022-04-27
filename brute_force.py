@@ -2,7 +2,7 @@
 from network.Net import Net
 from input_data_parser import Input_Reader
 # solution x - two dimensional array of path-flows
-from network.Solution import Demand_flow, Path_flow, Solution
+from network.Solution import Demand_flow, Demand_path_flow, Solution
 import itertools
 
 
@@ -19,7 +19,8 @@ class BruteForce():
     def solve(self):
         possible_solution = self.get_all_possible_flows()
         # print(possible_solution)
-        self.choose_solution(possible_solution)
+        # self.choose_solution(possible_solution)
+        pass
 
     def get_all_possible_flows(self):
         possible_flows = []
@@ -39,14 +40,14 @@ class BruteForce():
 
         if curp == len_paths:
             demand_flow = Demand_flow(curd, len_paths)
-            path_flow = Path_flow(curp, lefth)
+            path_flow = Demand_path_flow(curp, lefth)
             demand_flow.path_flows.append(path_flow)
             all_possible_combinations.append(demand_flow)
         else:
             for parth in range(lefth):
                 one_combinataion = self.rec(curd, curp + 1, len_paths, lefth - parth)
                 for demand_flow in one_combinataion:
-                    path_flow = Path_flow(curp, parth)
+                    path_flow = Demand_path_flow(curp, parth)
                     demand_flow.path_flows.append(path_flow)
                 all_possible_combinations += one_combinataion
 
@@ -62,14 +63,14 @@ class BruteForce():
             solution.demand_flow_list = list(combinations_of_demands_flows)
             solution.calulate_load_link(self.net.demands, self.net.links)
 
-            solution.calculateObjectiveDAP()
+            solution.calculate_objactive_DAP()
             if len(self.lastTopSolutionsDAP) < self.maxTopSolutions or solution.objectiveDAP < self.lastTopSolutionsDAP[-1].objectiveDAP:
                 self.lastTopSolutionsDAP.append(solution)
                 self.lastTopSolutionsDAP.sort(key=lambda x: x.objectiveDAP)
                 if len(self.lastTopSolutionsDAP) > self.maxTopSolutions:
                     self.lastTopSolutionsDAP.pop()
 
-            solution.calculateObjectiveDDAP(self.network.links)
+            solution.calculate_objactive_DDAP(self.network.links)
             if len(self.lastTopSolutionsDDAP) < self.maxTopSolutions or solution.objectiveDDAP < self.lastTopSolutionsDDAP[-1].objectiveDDAP:
                 self.lastTopSolutionsDDAP.append(solution)
                 self.lastTopSolutionsDDAP.sort(key=lambda x: x.objectiveDDAP)

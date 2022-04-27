@@ -1,12 +1,12 @@
 # class for solutions
 import math
-import re
+
 from typing import List
 from network.Demand import Demand
 from network.Link import Link
 
 class Link_load():
-    def __init__(self, link_id: int, number_of_signals: int, number_of_fiber: int ):
+    def __init__(self, link_id: int, number_of_signals: int, number_of_fiber: int):
         self.link_id = link_id
         self.number_of_signals = number_of_signals # volume
         self.number_of_fibers = number_of_fiber
@@ -29,7 +29,7 @@ class Demand_flow():
             msg += f"\n{str(path_flow)}"
         return msg
 
-class Path_flow():
+class Demand_path_flow():
     def __init__(self, path_id: int, lefth: int):
         self.path_id = path_id
         self.lefth = lefth
@@ -46,7 +46,7 @@ class Solution():
         self.link_load_list = [] # link_load_list
         # <demand part>
         self.number_of_demand = number_of_demands
-        self.demand_flow_list = [] #demand_flow_list
+        self.demand_flow_list = [] # demand_flow_list
 
         # bruteforce alg
         self.objactive_DAP = None
