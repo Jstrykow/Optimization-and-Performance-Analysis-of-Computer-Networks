@@ -22,10 +22,10 @@ class Chromosome:
         for link_id, link in enumerate(links):
             volume_sum = 0
             for path in paths:
-                if link_id + 1 in path.links:
+                if str(link_id + 1) in path.links_list:
                     volume = self.allocation_pattern.get((path.demand_id, path.path_id))
                     volume_sum += volume
-            link_values[link_id] = math.ceil(volume_sum / link.module) if prb == "DDAP" else volume_sum
+            link_values[link_id] = math.ceil(volume_sum / link.number_of_fibers) if prb == "DDAP" else volume_sum
         if prb == "DDAP":
             self.link_size = link_values
         else:
@@ -53,12 +53,12 @@ class Chromosome:
         if prob == "DDAP":
             z = 0
             for link_id, link_size in enumerate(self.link_size):
-                z += net.links[link_id].cost * link_size
+                z += net.links[link_id].fiber_cost * link_size
             self.z = z
         else:
             z = float('-inf')
             for i, link_load in enumerate(self.link_loads):
-                _z = link_load - net.links[i].number_of_modules * net.links[i].module
+                _z = link_load - net.links[i].number_of_lambdas_in_fiber * net.links[i].number_of_fibers
                 if _z > z:
                     z = _z
                 self.z = z

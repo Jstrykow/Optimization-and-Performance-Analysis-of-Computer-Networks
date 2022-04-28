@@ -1,5 +1,3 @@
-# this file represents implemenation of elvolutionary algorythm
-# it is heuristic : resionable solution in resionable time
 import copy
 import random
 from itertools import product
@@ -10,20 +8,9 @@ from network import Demand
 from network.Chromosome import Chromosome
 from network.Net import Net
 
-"""
-Program powinien umożliwiać:
-• określenie liczności populacji startowej,
-• określenie prawdopodobieństwa wystąpienia krzyżowania i mutacji,
-• wybór kryterium stopu (wymagane są: zadany czas, zadana liczba generacji, zadana liczba 
-mutacji, brak poprawy najlepszego znanego rozwiązania obserwowany w kolejnych N 
-generacjach),
-• zapis trajektorii procesu optymalizacji rozumianej jako sekwencja wartości najlepszych rozwiązań (chromosomów) w kolejnych generacjach,
-• wskazanie ziarna dla generatora liczb losowych.
-"""
-
 
 class EvolutionaryAlgorithm:
-    def __init__(self, seed: int, net: Net, prb: str, number_of_chromosomes: int, max_generations: int, max_time: int, max_generation: int, max_mutation: int, max_no_progress_generation: int, procent_of_best_chromosomes: int, crossover_probability: float, mutation_probability: float):
+    def __init__(self, seed: int, net: Net, prb: str, number_of_chromosomes: int, max_generations: int, max_time: int, max_mutation: int, max_no_progress_generation: int, procent_of_best_chromosomes: float, crossover_probability: float, mutation_probability: float):
         random.seed(seed)
 
         self.net = net
@@ -31,7 +18,6 @@ class EvolutionaryAlgorithm:
         self.number_of_chromosomes = number_of_chromosomes
         self.max_generations = max_generations
         self.max_time = max_time
-        self.max_generation = max_generation
         self.max_mutation = max_mutation
         self.max_no_progress_generation = max_no_progress_generation
         self.procent_of_best_chromosomes = procent_of_best_chromosomes
@@ -97,11 +83,6 @@ class EvolutionaryAlgorithm:
 
         return solution
 
-    def mutate(seed = None):
-        # there is adding radom element in proces of elvolution, it is to move from local optimum. 
-        # seed is parametr of function for making possible replication of function
-        pass
-
     def crossover(self, parents):
         father = parents[0]
         mother = parents[1]
@@ -133,8 +114,7 @@ class EvolutionaryAlgorithm:
         return random.random() < self.mutation_probability
 
     def get_init_population(self) -> List:
-        all_genes_combinations = [self.get_all_chromosomes_with_one_gene(demand) for demand in
-                                  self.net.demands]
+        all_genes_combinations = [self.get_all_chromosomes_with_one_gene(demand) for demand in self.net.demands]
         chromosomes = []
 
         for i in range(self.number_of_chromosomes):
@@ -149,20 +129,20 @@ class EvolutionaryAlgorithm:
         return chromosomes
 
     def get_all_chromosomes_with_one_gene(self, demand: Demand) -> List[Chromosome]:
-        volume_split = range(demand.volume + 1)
+        volume_split = range(demand.demand_volume + 1)
         volume_split_for_each_path = [volume_split for _ in range(demand.get_number_of_paths())]
 
         volume_split_combinations = [combination for combination in product(*volume_split_for_each_path) if
-                                     sum(combination) == demand.volume]
+                                     sum(combination) == demand.demand_volume]
 
         solutions = [Chromosome(self.build_gene(combination, demand)) for combination in volume_split_combinations]
         return solutions
 
-    def build_gene(combination: tuple, demand: Demand):
+    def build_gene(self, combination: tuple, demand: Demand):
         allocation_vector = {}
-        for demand_path in demand.demand_paths:
-            path_id = demand_path.path_id
-            flow_xdp = (demand.id, path_id)
+        for paths_list in demand.paths_list:
+            path_id = paths_list.path_id
+            flow_xdp = (demand.demand_id, path_id)
             allocation_vector[flow_xdp] = combination[path_id - 1]
         return allocation_vector
 
