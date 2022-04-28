@@ -106,7 +106,7 @@ class Solution():
             msg += str(link_load)
         msg += '\n-1\n\n'
         # <demand part>
-        msg += str(self.number_of_demand)
+        msg += str(self.number_of_demand) + "\n"
         #
         for demand in self.demand_flow_list:
             msg += f"\n{demand.demand_id} {demand.number_of_paths}"

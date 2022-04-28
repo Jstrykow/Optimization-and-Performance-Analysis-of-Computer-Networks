@@ -22,9 +22,9 @@ class BruteForce():
         self.choose_solution(possible_solution)
 
         print(self.best_solution_DAP)
-        # msg = "DAP - ID:" + str(self.best_solution_DAP.solution_id) + ", objecive value: " + str(self.best_solution_DAP.objective_DAP) + "\n"
-        # msg += "DDAP - ID:" + str(self.best_solution_DDAP.solution_id) + ", objecive value: " + str(self.best_solution_DDAP.objective_DDAP) + "\n"
-        # print(msg)
+        msg = "DAP - ID:" + str(self.best_solution_DAP.solution_id) + ", objecive value: " + str(self.best_solution_DAP.objective_DAP) + "\n"
+        msg += "DDAP - ID:" + str(self.best_solution_DDAP.solution_id) + ", objecive value: " + str(self.best_solution_DDAP.objective_DDAP) + "\n"
+        print(msg)
 
     def get_all_possible_flows(self):
         possible_flows = []
