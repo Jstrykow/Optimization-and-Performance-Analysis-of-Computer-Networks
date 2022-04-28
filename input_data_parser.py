@@ -41,7 +41,12 @@ class Input_Reader:
                 for j in range(number_of_paths):
                     path_parameters = file.readline().strip().split()
                     path_id = int(path_parameters[0])
-                    links_list = path_parameters[1:]
+                    links_list = []
+
+                    # print(path_parameters[1:])
+                    for i in path_parameters[1:]:
+                        path_link = links[int(i) - 1]
+                        links_list.append(path_link)
                     path = Path(path_id, links_list)
                     paths_list.append(path)
                 demand = Demand(demand_id, start_node=start_node_id, end_node=end_node_id, demand_volume=demand_volume)
@@ -54,8 +59,7 @@ class Input_Reader:
         net.demands = demands
         return net
 
-"""
+
 ir = Input_Reader()
 net = ir.read_links("data/net4.txt")
 print(net)
-"""
