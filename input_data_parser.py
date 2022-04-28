@@ -45,7 +45,7 @@ class Input_Reader:
                     path = Path(path_id, links_list)
                     paths_list.append(path)
                 demand = Demand(demand_id, start_node=start_node_id, end_node=end_node_id, demand_volume=demand_volume)
-                demand.paths_list = paths_list
+                demand.demand_paths = paths_list
                 demands.append(demand)
                 # print(demand)
                 file.readline()

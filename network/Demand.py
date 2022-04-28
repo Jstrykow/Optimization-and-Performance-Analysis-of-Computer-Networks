@@ -17,13 +17,13 @@ class Demand:
         self.start_node = int(start_node)
         self.end_node = int(end_node)
         self.demand_volume = int(demand_volume)
-        self.paths_list = []
+        self.demand_paths = []
 
     def __str__(self):
         resp = f"start node: {self.start_node}, end node: {self.end_node}, demand_volume: {self.demand_volume}, paths list: "
-        for path in self.paths_list:
+        for path in self.demand_paths:
             resp += f" {path} "
         return resp
 
     def get_number_of_paths(self) -> int:
-        return len(self.paths_list)
+        return len(self.demand_paths)
